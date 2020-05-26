@@ -1,13 +1,14 @@
-# Google Student Training in Engineering Program
+# STEP Portfolio
 
-This repo contains the projects you'll work on for the first half of STEP.
-This work is based on the [Google Software Product Sprint](https://g.co/softwareproductsprint) program.
+## Overview
+A web application portfolio that displays my resume, personal projects, and some fun facts about me.
 
-To get started:
+## Tools and Technologies
+Some of the tools that will be used to build this portfolio are
+* HTML
+* CSS
+* Javascript
+* Java
 
-- Login to [Google Cloud Shell](https://ssh.cloud.google.com/cloudshell/editor)
-- Clone this repo: `cd; git clone https://github.com/googleinterns/step.git`
-- Open the GitHub setup walkthrough: `teachme ~/step/walkthroughs/week-1-setup/github-setup-walkthrough.md`
-  - If the tutorial panel does not open or display the walkthrough contents, try refreshing the page.
-
-Then follow the on-screen instructions to set up your repo.
+## License
+This code is licensed under the Apache 2.0 License.
