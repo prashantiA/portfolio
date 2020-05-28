@@ -17,7 +17,7 @@ nav ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: #002229;
   position: fixed;
   top: 0;
   width: 100%;
@@ -34,19 +34,18 @@ nav li a {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-family: 'Roboto';
+  font-family: 'Oswald', sans-serif;
   font-size: 24px;
 }
 
 nav li a:hover {
-  background-color: #111;
+  background-color: #BDDBD2;
 }
 
 body {
   width: 100%;
   height: 100%;
-  background-color: #D2F3FF;
-  color: #333;
+  background-color: white;
   clear: both;
   margin-left: 0;
   margin-right: 0;
@@ -55,7 +54,7 @@ body {
 hr {
   width: 95%;
   height: 10px;
-  background-color: #111;
+  background-color: #001114;
 }
 
 .circle {
@@ -67,6 +66,16 @@ hr {
 
 h1 {
   text-align: center;
+  color: #001114;
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  font-size: 64px;
+}
+
+p {
+  font-size: 24px;
+  color: #002229;
+  font-family: "Cardo", serif;
 }
 
 .centered {
@@ -78,11 +87,15 @@ h1 {
 /*For the different "page-like" sections of the website*/
 .group {
   text-align: justify;
-  font-family: 'Roboto';
-  font-size: 24px;
   padding: 30px;
   width: 100%;
   height: 100%;
+}
+
+.group li {
+  font-size: 24px;
+  color: #002229;
+  font-family: "Cardo", serif;
 }
 
 #greeting-container {
