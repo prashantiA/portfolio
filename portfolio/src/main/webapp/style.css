@@ -72,6 +72,14 @@ h1 {
   font-size: 4rem;
 }
 
+h2 {
+  text-align: left;
+  color: #002229;
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+}
+
 p {
   font-size: 1.3rem;
   color: #002229;
@@ -89,7 +97,7 @@ p {
   text-align: justify;
   padding: 1.5rem;
   width: 96%;
-  height: 100%;
+  clear:both;
 }
 
 .group li {
@@ -105,6 +113,27 @@ p {
 .icon-links a {
   color: #002229;
 }
+
+.project-image {
+  height: 20rem;
+  width: auto;
+  float: right;
+  padding: 2rem;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.resume {
+  width: 40%;
+  height: 70%;
+}
+
 
 #greeting-container {
   margin-top: 1.5rem;
