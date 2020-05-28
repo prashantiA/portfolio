@@ -32,7 +32,7 @@ nav li a {
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding: 1rem 1rem;
   text-decoration: none;
   font-family: 'Oswald', sans-serif;
   font-size: 24px;
@@ -53,15 +53,15 @@ body {
 
 hr {
   width: 95%;
-  height: 10px;
+  height: 0.5rem;
   background-color: #001114;
 }
 
 .circle {
  border-radius: 50%;
  padding: 0px;
- width: 400px;
- height: 400px;
+ width: 25rem;
+ height: 25rem;
 }
 
 h1 {
@@ -69,11 +69,11 @@ h1 {
   color: #001114;
   font-family: "Oswald", sans-serif;
   text-transform: uppercase;
-  font-size: 64px;
+  font-size: 4rem;
 }
 
 p {
-  font-size: 24px;
+  font-size: 1.3rem;
   color: #002229;
   font-family: "Cardo", serif;
 }
@@ -87,19 +87,19 @@ p {
 /*For the different "page-like" sections of the website*/
 .group {
   text-align: justify;
-  padding: 30px;
+  padding: 1.5rem;
   width: 96%;
   height: 100%;
 }
 
 .group li {
-  font-size: 24px;
+  font-size: 1.3rem;
   color: #002229;
   font-family: "Cardo", serif;
 }
 
 .icon-links {
-  font-size: 80;
+  font-size: 4rem;
 }
 
 .icon-links a {
@@ -107,5 +107,5 @@ p {
 }
 
 #greeting-container {
-  margin-top: 20px;
+  margin-top: 1.5rem;
 }
