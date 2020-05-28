@@ -2,6 +2,10 @@ html {
   scroll-behavior:smooth;
 }
 
+nav {
+  overflow: hidden;
+}
+
 nav ul {
   list-style-type: none;
   margin: 0;
@@ -38,6 +42,8 @@ body {
   background-color: #D2F3FF;
   color: #333;
   clear: both;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 hr {
@@ -68,7 +74,6 @@ h1 {
   font-family: 'Roboto';
   font-size: 24px;
   padding: 30px;
-  margin-right: 150px;
   width: 95%;
   height:100%;
 }
