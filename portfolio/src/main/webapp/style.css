@@ -74,6 +74,14 @@ h1 {
   font-size: 4rem;
 }
 
+#welcome-header {
+  width: 58rem;
+  margin: auto;
+  text-align: left;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
 h2 {
   text-align: left;
   color: #002229;

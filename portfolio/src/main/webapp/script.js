@@ -40,3 +40,20 @@ function addFunFact() {
   $(elem).animate({'opacity': 0}, 1000, function () {$(elem).text(fact);}).animate({'opacity': 1}, 1000);
   prev = index;  
 }
+
+let i = 0;
+let elem = null;
+const txt = 'Welcome to my personal portfolio!';
+let speed = 50;
+
+function typeWriter() {
+  if (i===0) {
+    elem = document.getElementById('welcome-header');
+    elem.innerHTML = '';
+  }
+  if (i < txt.length) {
+    elem.innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
