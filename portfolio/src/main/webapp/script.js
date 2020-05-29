@@ -16,29 +16,27 @@
  * Adds a random fun fact to the page.
  */
 
-prev = null;
+var prev = null;
 
 function addFunFact() {
   const facts =
-      ['I have a younger sister named Aruna!', 'My favorite ice cream flavor is mint chocolate chip!', 
-	      'I\'ve been to four continents!', 'My favorite series is Harry Potter!', 'I\'m from the Bay Area!',
-              'I can speak French!', 'I\'m part of CMU\'s KPOP dance club!'];
+      [`I have an amazing younger sister named Aruna!`, `My favorite ice cream flavor is mint chocolate chip!`, 
+	      `I've been to four continents!`, `My favorite series is Harry Potter!`, `I'm from the Bay Area!`,
+              `I can speak French!`, `I'm part of CMU's KPOP dance club!`];
 
   // Pick a random greeting.
-  index = null;
+  var index = null;
+  var seed = Math.random();
   if (prev != null) {
-    index = Math.floor(Math.random() * (facts.length - 1));
+    index = Math.floor(seed * (facts.length - 1));
     if (index >= prev) index += 1;
   }
   else {
-    index = Math.floor(Math.random() * (facts.length));
+    index = Math.floor(seed * (facts.length));
   }
-  const fact = facts[index];
-  console.log('this is running');
+  var fact = facts[index];
   // Add it to the page.
-  const elem = document.getElementById('fact');
-  $(elem).animate({'opacity': 0}, 1000, function () {
-    $(elem).text(fact);})
-	   .animate({'opacity': 1}, 1000);
+  var elem = document.getElementById('fact');
+  $(elem).animate({'opacity': 0}, 1000, function () {$(elem).text(fact);}).animate({'opacity': 1}, 1000);
   prev = index;  
 }
