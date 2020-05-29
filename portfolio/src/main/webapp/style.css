@@ -1,5 +1,6 @@
 html {
   scroll-behavior: smooth;
+  margin-bottom: 0;
 }
 
 nav {
@@ -49,6 +50,7 @@ body {
   clear: both;
   margin-left: 0;
   margin-right: 0;
+  margin-bottom: 0;
 }
 
 hr {
@@ -78,6 +80,15 @@ h2 {
   font-family: "Oswald", sans-serif;
   text-transform: uppercase;
   font-size: 2.5rem;
+}
+
+h3 {
+  color: white;
+  font-family: 'Lato', sans-serif;
+  padding: 0.25rem;
+  font-size: 1rem;
+  margin: 0;
+  text-align: center;
 }
 
 p {
@@ -173,4 +184,24 @@ button:hover {
   border-radius: 0.25rem;
   padding: 1rem;
   font-family: 'Lato', sans-serif;
+}
+
+.footer {
+  width: 100%;
+  height: 10%;
+  background-color: #002229;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.icon-footer {
+  font-size: 2rem !important;
+  text-align: center;
+  height: 5%;
+  padding: 0.25rem;
+  margin: 0;
+}
+
+.icon-footer a {
+  color: white;
 }
