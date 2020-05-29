@@ -16,7 +16,7 @@
  * Adds a random fun fact to the page.
  */
 
-var prev = null;
+let prev = null;
 
 function addFunFact() {
   const facts =
@@ -25,8 +25,8 @@ function addFunFact() {
               `I can speak French!`, `I'm part of CMU's KPOP dance club!`];
 
   // Pick a random greeting.
-  var index = null;
-  var seed = Math.random();
+  let index = null;
+  let seed = Math.random();
   if (prev != null) {
     index = Math.floor(seed * (facts.length - 1));
     if (index >= prev) index += 1;
@@ -34,9 +34,9 @@ function addFunFact() {
   else {
     index = Math.floor(seed * (facts.length));
   }
-  var fact = facts[index];
+  let fact = facts[index];
   // Add it to the page.
-  var elem = document.getElementById('fact');
+  let elem = document.getElementById('fact');
   $(elem).animate({'opacity': 0}, 1000, function () {$(elem).text(fact);}).animate({'opacity': 1}, 1000);
   prev = index;  
 }
