@@ -87,6 +87,7 @@ p {
 }
 
 .centered {
+  clear: both;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -118,23 +119,58 @@ p {
   height: 20rem;
   width: auto;
   float: right;
-  padding: 2rem;
-}
-
-.float-right {
-  float: right;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  padding-top: 1.5rem;
+  padding-bottom:1.5rem;
 }
 
 .float-left {
   float: left;
+  padding-right: 1.5rem;
+}
+
+.right-text {
+  text-align: right;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
 }
 
 .resume {
   width: 40%;
-  height: 70%;
+  height: 500px;
 }
 
+button {
+  display: inline-block;
+  border-radius: 0.25rem;
+  background-color: white;
+  border: 0.25rem solid #CEABB1;
+  color: #CEABB1;
+  text-align: center;
+  font-size: 1.5rem;
+  font-family: 'Raleway', sans-serif;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 12rem;
+  margin: 0.5rem;
+}
 
-#greeting-container {
-  margin-top: 1.5rem;
+button:hover {
+  background-color: #CEABB1;
+  color: white;
+}
+
+.fun-fact {
+  width: 65%;
+  border: 0.15rem solid #579E89;
+  height: 4rem;
+  text-align: center;
+  text-transform: none;
+  background-color: #BDDBD2;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  font-family: 'Lato', sans-serif;
 }
