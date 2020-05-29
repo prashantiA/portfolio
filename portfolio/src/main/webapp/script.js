@@ -44,7 +44,7 @@ function addFunFact() {
 let i = 0;
 let elem = null;
 const txt = 'Welcome to my personal portfolio!';
-let speed = 50;
+const speed = 75;
 
 function typeWriter() {
   if (i===0) {
