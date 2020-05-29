@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Prashanti Anderson's Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Cardo&family=Oswald:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Raleway:wght@300;500&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/39869a2f70.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
@@ -17,6 +18,7 @@
   </ul>
   </nav>
   <body>
+    <div style="clear: both"></div>
     <div id="top" class="full-height group">
       <h1>Welcome to my personal portfolio!</h1>
       <img src="/images/catgoose.png" alt="Prashanti Profile Picture" class="circle centered"/>
@@ -27,12 +29,12 @@
     </div>
     <hr>
     <div id="about-me" class="full-height group">
-      <h1>About Me</h1>
+      <h1 class="right-text">About Me</h1>
+      <img src="/images/honk_square.jpg" alt="Prashanti and Honk" class="circle centered float-left"/>
       <p>
         Hi! My name is Prashanti and I am currently a rising sophomore at 
         Carnegie Mellon University in the School of Computer Science. I am a 
-        computer science major and plan to do a concentration in Algorithms 
-        and Complexity as well as either an additional major or minor in math. 
+        computer science major and either an additional major or minor in math. 
         I love problem solving, algorithm design, discrete math, and typesetting
         proofs (its so satisfying!).
       </p>
@@ -58,59 +60,73 @@
         big fan of the <a href="https://www.brandonsanderson.com/what-is-the-cosmere/">Cosmere</a>
         and can often be found listening to Shardcast or browsing the Seventeenth Shard. 
       </p>
-      <img src="/images/honk_square.jpg" alt="Prashanti and Honk" class="circle centered"/>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+    </div>
+    <div style="clear:both"></div>
+    <div id="fun-fact-div" class="group">
+      <h2 id="fact" class="centered fun-fact">Click below for a fun fact about me!</h2>
+      <button id="fact-button" class="button centered"  onclick="addFunFact()">Explore More</button>
     </div>
     <hr>
     <div id="proj-resume" class="full-height group">
       <h1> Projects and Resume </h1>
       <h2>Projects and Experience</h2>
       <ol>
-        <li>FRC/VEX Robotics</li>
-	<img src="/images/powerup_robot.jpg" alt="Our 2018 Robot for the Powerup Season" class="project-image"/>
-	<p>
-          I was part of robotics for all four years of high school. I first joined my school's FRC
-          team during my freshman year as part of the software subteam. As part of the team I worked on 
-	  test driven development for our new flexible framework, autonomous pathing and robot control,
-	  self calibrating subsystems, and much more. My technical experience focused on effective testing
-	  and control theory.
-	</p>
-	<p>
-	  In addition, I lead outreach efforts such as our FTC and FLL mentoring program. The program supported
-	  two FTC teams with biweekly meetings and mentorship and started six FLL teams. 
-	</p>
-	<p>
-	  In addition to my involvement with FRC, I was also part of the VEX program for six years. In tenth grade
-          I started a VEX team at my high school to expand the robotics program and the number of students it could
-          reach. The program included two VEX robots which competing anually in the VRC competition. They won the Judges
-          award during my senior year.
-        </p>
-	<p>
-	  In addition to communicating with the school, securing space, recruiting members, and managing logistics, I was
-	  also heavily involved with the design, creation, and programming of the robots. I have significant experience
-	  with VEX design as well as leveraging my control theory knowledge from FRC to build a better product and
-	  help my teammates grow.
-	</p>
-	<li>Teaching Assistant at Carnegie Mellon University</li>
-	<img src="images/122_staff.jpg" alt="Course Staff for 15-122 Spring 2020" class="project-image"/>
-	<p>
-	  I am a teaching assistant at Carnegie Mellon Unversity. In Spring 2020 I was on the 15-122 course staff, where I helped
-          grade assignments, taught a lab, and redesigned written assignments. The class teaches how to reason about code and 
-	  correctness, basic data structures, and programming in C. 
-	</p>
-	<p>
-	  In the fall I will be joining the 15-251 course staff. The class covers mathematical models of computation and provides
-	  a broad introduction to computer science theory including P vs. NP, approximation algorithms, randomized algorithms, 
-	  Godel's Incompleteness Theorem, and a variety of other topics which vary by semester. I'm excited to be a part of the
-	  team and for (hopefully) in person recitations!
-	</p>	
-	<li>STEP Intern at Google</li>
-	<p>
-	  I am a summer 2020 STEP intern at Google with the Surveys team. My projects include this portfolio as well as a future
-          capstone project in web development.
-	</p>
+	<div id="robotics">
+          <li>FRC/VEX Robotics</li>
+	  <img src="/images/powerup_robot.jpg" alt="Our 2018 Robot for the Powerup Season" class="project-image"/>
+	  <p>
+            I was part of robotics for all four years of high school. I first joined my school's FRC
+            team during my freshman year as part of the software subteam. As part of the team I worked on 
+	    test driven development for our new flexible framework, autonomous pathing and robot control,
+	    self calibrating subsystems, and much more. My technical experience focused on effective testing
+	    and control theory.
+	  </p>
+	  <p>
+	    In addition, I lead outreach efforts such as our FTC and FLL mentoring program. The program supported
+	    two FTC teams with biweekly meetings and mentorship and started six FLL teams. 
+	  </p>
+	  <p>
+	    In addition to my involvement with FRC, I was also part of the VEX program for six years. In tenth grade
+            I started a VEX team at my high school to expand the robotics program and the number of students it could
+            reach. The program included two VEX robots which competing anually in the VRC competition. They won the Judges
+            award during my senior year.
+          </p>
+	  <p>
+	    In addition to communicating with the school, securing space, recruiting members, and managing logistics, I was
+	    also heavily involved with the design, creation, and programming of the robots. I have significant experience
+	    with VEX design as well as leveraging my control theory knowledge from FRC to build a better product and
+	    help my teammates grow.
+	  </p>
+	</div>
+	<div style="clear: both"></div>
+	<div id="teaching">
+	  <li>Teaching Assistant at Carnegie Mellon University</li>
+	  <img src="images/122_staff.jpg" alt="Course Staff for 15-122 Spring 2020" class="project-image"/>
+	  <p>
+	    I am a teaching assistant at Carnegie Mellon Unversity. In Spring 2020 I was on the 15-122 course staff, where I helped
+            grade assignments, taught a lab, and redesigned written assignments. The class teaches how to reason about code and 
+	    correctness, basic data structures, and programming in C. 
+	  </p>
+	  <p>
+	    In the fall I will be joining the 15-251 course staff. The class covers mathematical models of computation and provides
+	    a broad introduction to computer science theory including P vs. NP, approximation algorithms, randomized algorithms, 
+	    Godel's Incompleteness Theorem, and a variety of other topics which vary by semester. This has been my favorite class at 
+	    Carnegie Mellon so far and I'm excited to be a part of the team and for (hopefully) in person recitations!
+	  </p>
+	  <p>
+	    I hope to broaden and reinforce my knowledge of CS theory in this position by helping students and interacting with all
+	    the amazing, intelligent, and insanely talented other TAs. As I learn more about computer science theory I want to use this
+	    as a stepping stone to get involved with research in the area.
+	  </p>
+       </div>
+       <div style="clear: both"></div>
+       <div id="step">	  
+	  <li>STEP Intern at Google</li>
+	  <p>
+	    I am a summer 2020 STEP intern at Google with the Surveys team. My projects include this portfolio as well as a future
+            capstone project in web development.
+	  </p>
+	</div>
       </ol>
       </ul>
       <h2>Resume</h2>
