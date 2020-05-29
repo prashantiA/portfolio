@@ -36,7 +36,9 @@ function addFunFact() {
   const fact = facts[index];
   console.log('this is running');
   // Add it to the page.
-  const factContainer = document.getElementById('fact');
-  factContainer.innerText = fact;
+  const elem = document.getElementById('fact');
+  $(elem).animate({'opacity': 0}, 1000, function () {
+    $(elem).text(fact);})
+	   .animate({'opacity': 1}, 1000);
   prev = index;  
 }
