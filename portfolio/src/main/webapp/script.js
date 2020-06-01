@@ -57,3 +57,27 @@ function typeWriter() {
     setTimeout(typeWriter, TYPEWRITER_SPEED);
   }
 }
+
+async function loadBlog() {
+  const response = await fetch('/data');
+  const content = await response.json();
+  const elem = document.getElementById('blog-content');
+  elem.innerHTML = '';
+  let index = 0;
+  while (index < content.length) {
+    elem.appendChild(formatComment(content[index]));
+    index++;
+  }
+}
+
+function formatComment(comment) {
+  var text = document.createTextNode(comment);
+  const commentElem = document.createElement('p');
+  commentElem.appendChild(text);
+  return commentElem;
+}
+
+function start() {
+  typeWriter();
+  loadBlog();
+}
