@@ -41,19 +41,19 @@ function addFunFact() {
   prev = index;  
 }
 
-let i = 0;
-let elem = null;
-const txt = 'Welcome to my personal portfolio!';
-const speed = 75;
+let typewriterIndex = 0;
+let typewriterElem = null;
+const TYPEWRITER_TEXT = 'Welcome to my personal portfolio!';
+const TYPEWRITER_SPEED = 75;
 
 function typeWriter() {
-  if (i===0) {
-    elem = document.getElementById('welcome-header');
-    elem.innerHTML = '';
+  if (typewriterIndex === 0) {
+    typewriterElem = document.getElementById('welcome-header');
+    typewriterElem.innerHTML = '';
   }
-  if (i < txt.length) {
-    elem.innerHTML += txt.charAt(i);
-    i++;
-    setTimeout(typeWriter, speed);
+  if (typewriterIndex < TYPEWRITER_TEXT.length) {
+    typewriterElem.innerHTML += TYPEWRITER_TEXT.charAt(typewriterIndex);
+    typewriterIndex++;
+    setTimeout(typeWriter, TYPEWRITER_SPEED);
   }
 }
