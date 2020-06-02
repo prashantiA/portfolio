@@ -146,7 +146,12 @@ p {
 
 .float-left {
   float: left;
-  padding-right: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.float-right {
+  float: right;
+  margin-left: 1.5rem;
 }
 
 .right-text {
@@ -211,4 +216,40 @@ button:hover {
 
 .icon-footer a {
   color: white;
+}
+
+.comment-button {
+  display: inline-block;
+  border-radius: 0.25rem;
+  background-color: white;
+  border: 0.10rem solid #CEABB1;
+  color: #CEABB1;
+  text-align: center;
+  font-size: 1.25rem;
+  font-family: 'Raleway', sans-serif;
+  padding: 0;
+  width: 7rem;
+  margin-top: 0;
+}
+
+.comment-button:hover {
+  background-color: #CEABB1;
+  color: white;
+}
+
+.comment {
+  width: 98%;
+  margin-left: 0;
+  background-color: #BDDBD2;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.comment p {
+  font-size: 1rem;
 }
