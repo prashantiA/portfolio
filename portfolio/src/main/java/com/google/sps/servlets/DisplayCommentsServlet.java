@@ -1,4 +1,6 @@
 // Copyright 2019 Google LLC
+// gle.appengine.api.datastore.FetchOptions
+//
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,6 +23,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.FetchOptions; 
 import com.google.sps.data.Comment;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -28,25 +31,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
 import com.google.gson.*;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/display-comments")
 public class DisplayCommentsServlet extends HttpServlet {
 
-  private ArrayList<String> comments = new ArrayList<String>(); 
-  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json;");
     Gson gson = new Gson();
 
+    int numToDisplay;
+    try {
+      numToDisplay = Integer.parseInt(request.getParameter("num"));
+    } catch (NumberFormatException e) {
+      System.err.println("Could not convert to int: " + request.getParameter("num"));
+      return;
+    }
+
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    PreparedQuery results = datastore.prepare(query);
+    Iterable<Entity> results = datastore.prepare(query).asIterable(FetchOptions.Builder.withLimit(numToDisplay));
+
 
     ArrayList<Comment> commentContent = new ArrayList<Comment>();
-    for (Entity entity : results.asIterable()) {
+    for (Entity entity : results) {
       long id = entity.getKey().getId();
       String commentText = (String) entity.getProperty("content");
       long timestamp = (long) entity.getProperty("timestamp");
