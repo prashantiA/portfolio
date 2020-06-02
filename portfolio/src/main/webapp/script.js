@@ -59,7 +59,6 @@ function typeWriter() {
 }
 
 async function loadComments() {
-  console.log("loading comments");
   let numToFetch = document.getElementById('quantity').value;
 
   const response = await fetch('/display-comments?num=' + numToFetch);
@@ -85,6 +84,11 @@ function formatComment(comment) {
   commentElem.id = comment.id;
   commentElem.appendChild(text);
   return commentElem;
+}
+
+async function deleteAllComments() {
+  const response = await fetch('/delete-comments', {method : 'post'});
+  loadComments();
 }
 
 function start() {
