@@ -58,10 +58,10 @@ function typeWriter() {
   }
 }
 
-async function loadBlog() {
-  const response = await fetch('/data');
+async function loadComments() {
+  const response = await fetch('/display-comments');
   const content = await response.json();
-  const elem = document.getElementById('blog-content');
+  const elem = document.getElementById('comments-content');
   elem.innerHTML = '';
   let index = 0;
   while (index < content.length) {
@@ -71,13 +71,14 @@ async function loadBlog() {
 }
 
 function formatComment(comment) {
-  var text = document.createTextNode(comment);
+  var text = document.createTextNode(comment.content);
   const commentElem = document.createElement('p');
+  commentElem.id = comment.id;
   commentElem.appendChild(text);
   return commentElem;
 }
 
 function start() {
   typeWriter();
-  loadBlog();
+  loadComments();
 }
