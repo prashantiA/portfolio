@@ -59,20 +59,29 @@ function typeWriter() {
 }
 
 async function loadComments() {
-  const response = await fetch('/display-comments');
+  console.log("loading comments");
+  let numToFetch = document.getElementById('quantity').value;
+
+  const response = await fetch('/display-comments?num=' + numToFetch);
   const content = await response.json();
+
   const elem = document.getElementById('comments-content');
   elem.innerHTML = '';
+
   let index = 0;
   while (index < content.length) {
     elem.appendChild(formatComment(content[index]));
     index++;
   }
+
+  document.getElementById('quantity').value = content.length;
 }
 
 function formatComment(comment) {
-  var text = document.createTextNode(comment.content);
-  const commentElem = document.createElement('p');
+  var text = document.createElement('p');
+  text.innerHTML = comment.content;
+  const commentElem = document.createElement('div');
+  commentElem.classList.add('comment');
   commentElem.id = comment.id;
   commentElem.appendChild(text);
   return commentElem;
