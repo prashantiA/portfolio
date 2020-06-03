@@ -67,10 +67,8 @@ async function loadComments() {
   const elem = document.getElementById('comments-content');
   elem.innerHTML = '';
 
-  let index = 0;
-  while (index < content.length) {
+  for (index = 0; index < content.length; index++) {
     elem.appendChild(formatComment(content[index]));
-    index++;
   }
 
   document.getElementById('quantity').value = content.length;
@@ -78,7 +76,7 @@ async function loadComments() {
 
 function formatComment(comment) {
   var text = document.createElement('p');
-  text.innerHTML = comment.content;
+  text.textContent = comment.content;
   const commentElem = document.createElement('div');
   commentElem.classList.add('comment');
   commentElem.id = comment.id;
@@ -89,10 +87,19 @@ function formatComment(comment) {
 
 async function deleteAllComments() {
   const response = await fetch('/delete-comments', {method : 'post'});
+  
+  /* Timeout selected experimentally to prevent most issues with latency
+   * There are still some latency issues but too much lag was introduced by making the timeout longer
+   */
   setTimeout(loadComments, 1000);
 }
 
 function start() {
   typeWriter();
+
+  /* Short timeout to address latency issues after adding comments
+   * Prevents most issues with comments not appearing after they were added
+   * No noticeable lag
+   */
   setTimeout(loadComments, 100);
 }

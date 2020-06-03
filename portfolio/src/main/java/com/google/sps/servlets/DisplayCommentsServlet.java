@@ -15,6 +15,7 @@
 // limitations under the License.
 
 package com.google.sps.servlets;
+
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Key;
@@ -38,9 +39,11 @@ import com.google.gson.*;
 @WebServlet("/display-comments")
 public class DisplayCommentsServlet extends HttpServlet {
 
+  public final String WRITE_TYPE = "applications/json;";
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("application/json;");
+    response.setContentType(WRITE_TYPE);
     Gson gson = new Gson();
 
     int numToDisplay;
@@ -48,6 +51,7 @@ public class DisplayCommentsServlet extends HttpServlet {
       numToDisplay = Integer.parseInt(request.getParameter("num"));
     } catch (NumberFormatException e) {
       System.err.println("Could not convert to int: " + request.getParameter("num"));
+      response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       return;
     }
 

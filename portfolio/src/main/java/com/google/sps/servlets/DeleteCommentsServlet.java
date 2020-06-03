@@ -25,6 +25,7 @@ public class DeleteCommentsServlet extends HttpServlet {
     deleteAll();
   }
 
+   /** Deleted all comments from datastore */
   private void deleteAll() {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Query query = new Query("Comment");
