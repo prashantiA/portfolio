@@ -169,7 +169,7 @@ button {
   display: inline-block;
   border-radius: 0.25rem;
   background-color: white;
-  border: 0.25rem solid #CEABB1;
+  border: 0.2rem solid #CEABB1;
   color: #CEABB1;
   text-align: center;
   font-size: 1.5rem;
@@ -227,9 +227,9 @@ button:hover {
   text-align: center;
   font-size: 1.25rem;
   font-family: 'Raleway', sans-serif;
-  padding: 0;
-  width: 7rem;
+  padding: 0.75rem;
   margin-top: 0;
+  width: auto;
 }
 
 .comment-button:hover {
@@ -252,4 +252,32 @@ button:hover {
 
 .comment p {
   font-size: 1rem;
+}
+
+#comments p {
+  margin-top: 0.75rem;
+}
+
+textarea {
+  width: 50%;
+  padding: 1rem 1.25rem;
+  margin-top: 0;
+  margin-right: 0.5rem;
+  box-sizing: border-box;
+  border-radius: 0.25rem;
+  border-color: #002229;
+  color: #002229;
+  font-family: "Cardo", serif;
+  font-size: 1rem;
+}
+
+input[type=number] {
+  width: 3rem;
+  height: 2rem;
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.25rem;
+  border-color: #002229;
+  font-family: "Cardo", serif;
+  font-size: 1rem;
+  border-width: thin;
 }

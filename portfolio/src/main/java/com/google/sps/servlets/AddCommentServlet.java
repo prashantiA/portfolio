@@ -8,15 +8,19 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.FetchOptions;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.lang.Thread;
+import java.lang.InterruptedException;
 import com.google.gson.*;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** WebServlet that handles requests to add comments to the page */
 @WebServlet("/add-comment")
 public class AddCommentServlet extends HttpServlet {
 
@@ -28,6 +32,7 @@ public class AddCommentServlet extends HttpServlet {
 				        
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
+
     response.sendRedirect("/index.html#comments");
   }
 }

@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.*;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** Servlet that returns comments to be displayed */
 @WebServlet("/display-comments")
 public class DisplayCommentsServlet extends HttpServlet {
 

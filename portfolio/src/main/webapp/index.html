@@ -140,11 +140,12 @@
     <hr>
     <div id="comments" class="group">
       <form action="/add-comment" method="POST">
-	<input type="text" name="comment-text" class="float-left">
+	      <textarea name="comment-text" class="float-left" maxlength="1500"></textarea>
 	<input type="Submit" value="Comment" class="comment-button float-left"/>
       </form>
       <button id="comment-quantity" class="comment-button float-right" onclick="loadComments()">Update</button>
       <input type="number" id="quantity" name="quantity" class="float-right" value="10" min="1" max="50">
+      <p class="float-right">Number of comments to display:</p>
       <div style="clear: both"></div>
       <div id="comments-content"></div>
       <button id="comment-delete-all" class="centered" onclick="deleteAllComments()">Delete All Comments</button>
@@ -154,7 +155,7 @@
         <a href="https://github.com/prashantiA"><i class="fab fa-github fa-xs"></i></a>
         <a href="https://linkedin.com/in/prashanti-anderson"><i class="fab fa-linkedin fa-xs"></i></a>
       </h1>
-      <h3> Last Updated: 06-02-2020 </h3>
+      <h3> Last Updated: 06-03-2020 </h3>
     </div>
   </body>
 </html>
