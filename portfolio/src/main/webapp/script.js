@@ -85,13 +85,14 @@ function formatComment(comment) {
   commentElem.appendChild(text);
   return commentElem;
 }
+  
 
 async function deleteAllComments() {
   const response = await fetch('/delete-comments', {method : 'post'});
-  loadComments();
+  setTimeout(loadComments, 1000);
 }
 
 function start() {
   typeWriter();
-  loadComments();
+  setTimeout(loadComments, 100);
 }

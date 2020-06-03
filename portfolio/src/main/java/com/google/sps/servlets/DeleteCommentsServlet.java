@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import com.google.gson.*;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** Servlet that handles requests to delete comments */
 @WebServlet("/delete-comments")
 public class DeleteCommentsServlet extends HttpServlet {
 
