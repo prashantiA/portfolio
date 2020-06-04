@@ -248,6 +248,8 @@ button:hover {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   border-radius: 0.25rem;
+  overflow: hidden;
+  word-wrap: break-word;
 }
 
 .comment p {
