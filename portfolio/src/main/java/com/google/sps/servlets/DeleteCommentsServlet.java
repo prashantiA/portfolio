@@ -20,6 +20,9 @@ import java.util.ArrayList;
 @WebServlet("/delete-comments")
 public class DeleteCommentsServlet extends HttpServlet {
 
+  private static final String DELETE_ALL = "all";
+  private static final String BY_ID = "byId";
+
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String type = request.getParameter("type");
@@ -27,8 +30,8 @@ public class DeleteCommentsServlet extends HttpServlet {
       response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       System.err.println("No parameter for type");
     }
-    else if (type.equals("all")) deleteAll();
-    else if (type.equals("byId")) {
+    else if (type.equals(DELETE_ALL)) deleteAll();
+    else if (type.equals(BY_ID)) {
       try {
         long id = Long.parseLong(request.getParameter("id"));
 	deleteById(id);
