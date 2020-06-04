@@ -139,10 +139,10 @@
     </div>
     <hr>
     <div id="comments" class="group">
-      <form action="/add-comment" method="POST">
-	      <textarea name="comment-text" class="float-left" maxlength="1500"></textarea>
-	<input type="Submit" value="Comment" class="comment-button float-left"/>
-      </form>
+      <div id="add-comment-form">
+	<textarea id="comment-text" class="float-left" maxlength="1500"></textarea>
+	<button onclick="addComment()" class="comment-button float-left">Comment</button>
+      </div>
       <button id="comment-quantity" class="comment-button float-right" onclick="loadComments()">Update</button>
       <input type="number" id="quantity" name="quantity" class="float-right" value="10" min="1" max="50">
       <p class="float-right">Number of comments to display:</p>
