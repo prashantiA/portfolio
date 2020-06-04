@@ -58,10 +58,11 @@ function typeWriter() {
   }
 }
 
+let commentPage = 0;
 async function loadComments() {
   let numToFetch = document.getElementById('quantity').value;
 
-  const response = await fetch('/display-comments?num=' + numToFetch);
+  const response = await fetch('/display-comments?num=' + numToFetch + '&page=' + commentPage);
   const content = await response.json();
 
   const elem = document.getElementById('comments-content');
@@ -71,7 +72,7 @@ async function loadComments() {
     elem.appendChild(formatComment(content[index]));
   }
 
-  document.getElementById('quantity').value = content.length;
+  document.getElementById('quantity').value = numToFetch;
 }
 
 function formatComment(comment) {

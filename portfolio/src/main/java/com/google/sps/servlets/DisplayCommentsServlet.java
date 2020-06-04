@@ -55,18 +55,32 @@ public class DisplayCommentsServlet extends HttpServlet {
       return;
     }
 
+    int page;
+    try {
+      page = Integer.parseInt(request.getParameter("page"));
+    } catch (NumberFormatException e) {
+      System.err.println("Could not convert to int: " + request.getParameter("page"));
+      response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+      return;
+    }
+
+
     Query query = new Query(Comment.ENTITY_KIND).addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    Iterable<Entity> results = datastore.prepare(query).asIterable(FetchOptions.Builder.withLimit(numToDisplay));
+    Iterable<Entity> results = datastore.prepare(query).asIterable(FetchOptions.Builder.withLimit(numToDisplay*(page+1)));
 
 
     ArrayList<Comment> commentContent = new ArrayList<Comment>();
+    int commentCount = 0;
     for (Entity entity : results) {
-      long id = entity.getKey().getId();
-      String commentText = (String) entity.getProperty("content");
-      long timestamp = (long) entity.getProperty("timestamp");
-      Comment comment = new Comment (id, commentText, timestamp);
-      commentContent.add(comment);
+      if (commentCount >= numToDisplay * page) {
+        long id = entity.getKey().getId();
+        String commentText = (String) entity.getProperty("content");
+        long timestamp = (long) entity.getProperty("timestamp");
+        Comment comment = new Comment (id, commentText, timestamp);
+        commentContent.add(comment);
+      }
+      commentCount++;
     }
 
     String output = gson.toJson(commentContent);
