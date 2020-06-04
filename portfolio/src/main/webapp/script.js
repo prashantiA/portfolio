@@ -128,12 +128,16 @@ function prevPage() {
   loadComments();
 }
 
+async function addComment() {
+  let content = document.getElementById('comment-text').value;
+  if (content === '') return;
+  document.getElementById('comment-text').value = '';
+  const response = await fetch('/add-comment?comment-text=' + content, {method: 'post'}); 
+
+  setTimeout(loadComments, 500);
+}
+
 function start() {
   typeWriter();
-
-  /* Short timeout to address latency issues after adding comments
-   * Prevents most issues with comments not appearing after they were added
-   * No noticeable lag
-   */
-  setTimeout(loadComments, 100);
+  loadComments();
 }
