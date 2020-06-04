@@ -147,7 +147,17 @@
       <input type="number" id="quantity" name="quantity" class="float-right" value="10" min="1" max="50">
       <p class="float-right">Number of comments to display:</p>
       <div style="clear: both"></div>
+      <div id="comments-nav-top" class="comments-nav">
+        <button class="comment-button float-left" onclick="prevPage()">Previous Page</button>
+        <button class="comment-button float-right" onclick="nextPage()">Next Page</button>
+      </div>
+      <div style="clear: both"></div>
       <div id="comments-content"></div>
+      <div id="comments-nav-bottom" class="comments-nav">
+        <button class="comment-button float-left" onclick="prevPage()">Previous Page</button>
+        <button class="comment-button float-right" onclick="nextPage()">Next Page</button>
+      </div>
+      <div style="clear: both"></div>
       <button id="comment-delete-all" class="centered" onclick="deleteAllComments()">Delete All Comments</button>
     </div>
     <div id="footer" class="footer">
