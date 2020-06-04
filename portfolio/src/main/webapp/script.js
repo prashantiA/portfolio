@@ -61,6 +61,7 @@ function typeWriter() {
 let commentPage = 0;
 async function loadComments() {
   let numToFetch = document.getElementById('quantity').value;
+  await makeValidPage();
 
   const response = await fetch('/display-comments?num=' + numToFetch + '&page=' + commentPage);
   const content = await response.json();
@@ -105,6 +106,26 @@ async function deleteOneComment(id) {
   const response = await fetch('/delete-comments?type=byId&id='+id, {method : 'post'});
 
   setTimeout(loadComments, 100);
+}
+	
+async function makeValidPage() {
+  let response = await fetch('/comment-info');
+  let numComments = await response.json();
+  
+  let pageSize = document.getElementById('quantity').value;
+  let maxPage = Math.ceil((numComments[0])/pageSize) - 1;
+  
+  commentPage = Math.max(0, Math.min(maxPage, commentPage));
+}
+
+function nextPage() {
+  commentPage++;
+  loadComments();
+}
+
+function prevPage() {
+  commentPage--;
+  loadComments();
 }
 
 function start() {

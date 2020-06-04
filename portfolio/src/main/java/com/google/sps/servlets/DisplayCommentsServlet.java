@@ -44,6 +44,7 @@ public class DisplayCommentsServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType(WRITE_TYPE);
+    response.setCharacterEncoding("UTF-8");
     Gson gson = new Gson();
 
     int numToDisplay;
