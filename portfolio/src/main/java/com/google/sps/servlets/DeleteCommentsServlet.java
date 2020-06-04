@@ -29,18 +29,17 @@ public class DeleteCommentsServlet extends HttpServlet {
     if (type == null) {
       response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       System.err.println("No parameter for type");
-    }
-    else if (type.equals(DELETE_ALL)) deleteAll();
-    else if (type.equals(BY_ID)) {
+    } else if (type.equals(DELETE_ALL)) {
+      deleteAll();
+    } else if (type.equals(BY_ID)) {
       try {
         long id = Long.parseLong(request.getParameter("id"));
-	deleteById(id);
+        deleteById(id);
       } catch (NumberFormatException e) {
         System.err.println("Failed to parse to long: " + request.getParameter("id"));
-	response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       }
-    }
-    else {
+    } else {
       response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       System.err.println("Value " + type + " for parameter type is invalid");
     }
