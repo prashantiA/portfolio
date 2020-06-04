@@ -101,7 +101,7 @@ async function deleteAllComments() {
 }
 
 async function deleteOneComment(id) {
-  const response = await fetch('delete-comments?type=byId&id='+id, {method : 'post'});
+  const response = await fetch('/delete-comments?type=byId&id='+id, {method : 'post'});
 
   setTimeout(loadComments, 100);
 }
