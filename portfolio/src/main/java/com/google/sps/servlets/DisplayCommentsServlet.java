@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import com.google.gson.*;
+import com.google.gson.Gson;
 
 /** Servlet that returns comments to be displayed */
 @WebServlet("/display-comments")
@@ -55,7 +55,7 @@ public class DisplayCommentsServlet extends HttpServlet {
       return;
     }
 
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    Query query = new Query(Comment.ENTITY_KIND).addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Iterable<Entity> results = datastore.prepare(query).asIterable(FetchOptions.Builder.withLimit(numToDisplay));
 
