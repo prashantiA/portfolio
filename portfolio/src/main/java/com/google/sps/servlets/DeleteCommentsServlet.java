@@ -22,7 +22,25 @@ public class DeleteCommentsServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    deleteAll();
+    String type = request.getParameter("type");
+    if (type == null) {
+      response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+      System.err.println("No parameter for type");
+    }
+    else if (type.equals("all")) deleteAll();
+    else if (type.equals("byId")) {
+      try {
+        long id = Long.parseLong(request.getParameter("id"));
+	deleteById(id);
+      } catch (NumberFormatException e) {
+        System.err.println("Failed to parse to long: " + request.getParameter("id"));
+	response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+      }
+    }
+    else {
+      response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+      System.err.println("Value " + type + " for parameter type is invalid");
+    }
   }
 
    /** Deleted all comments from datastore */
@@ -37,5 +55,14 @@ public class DeleteCommentsServlet extends HttpServlet {
     }
 
     datastore.delete(toDelete);
+  }
+
+  /** Delete by ID
+   * @param id the id of the comment to be deleted
+   */
+  private void deleteById(long id) {
+    Key key = KeyFactory.createKey("Comment", id);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.delete(key);
   }
 }

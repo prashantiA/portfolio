@@ -81,17 +81,29 @@ function formatComment(comment) {
   commentElem.classList.add('comment');
   commentElem.id = comment.id;
   commentElem.appendChild(text);
+
+  let button = document.createElement('button');
+  button.textContent = "Delete Comment";
+  button.classList.add('comment-button');
+  button.onclick = function() {deleteOneComment(comment.id)};
+  commentElem.appendChild(button);
   return commentElem;
 }
   
 
 async function deleteAllComments() {
-  const response = await fetch('/delete-comments', {method : 'post'});
+  const response = await fetch('/delete-comments?type=all', {method : 'post'});
   
   /* Timeout selected experimentally to prevent most issues with latency
    * There are still some latency issues but too much lag was introduced by making the timeout longer
    */
   setTimeout(loadComments, 1000);
+}
+
+async function deleteOneComment(id) {
+  const response = await fetch('delete-comments?type=byId&id='+id, {method : 'post'});
+
+  setTimeout(loadComments, 100);
 }
 
 function start() {
