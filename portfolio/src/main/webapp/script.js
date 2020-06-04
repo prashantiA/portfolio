@@ -75,7 +75,7 @@ async function loadComments() {
 }
 
 function formatComment(comment) {
-  var text = document.createElement('p');
+  let text = document.createElement('p');
   text.textContent = comment.content;
   const commentElem = document.createElement('div');
   commentElem.classList.add('comment');

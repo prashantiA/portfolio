@@ -2,7 +2,9 @@ package com.google.sps.data;
 
 /** An comment on a webpage. */
 public final class Comment {
-	
+
+  public static final String ENTITY_KIND = "Comment";
+
   private final long id;
   private final String content;
   private final long timestamp;
