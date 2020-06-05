@@ -8,6 +8,8 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.sps.data.Comment;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -26,6 +28,14 @@ public class DeleteCommentsServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String type = request.getParameter("type");
+
+    UserService userService = UserServiceFactory.getUserService();
+    if (!userService.isUserLoggedIn() || !userService.isUserAdmin()) {
+      response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+      System.err.println("Cannot delete without admin permissions");
+      return;
+    }
+
     if (type == null) {
       response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       System.err.println("No parameter for type");
