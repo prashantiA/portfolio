@@ -63,6 +63,10 @@ async function loadComments() {
   let numToFetch = document.getElementById('quantity').value;
   await makeValidPage();
 
+  const userResponse = await fetch('/userapi', {method: 'post'});
+  const userRes = await userResponse.text();
+  const isAdmin = userRes === "true";
+
   const response = await fetch('/display-comments?num=' + numToFetch + '&page=' + commentPage);
   const content = await response.json();
 
@@ -70,13 +74,16 @@ async function loadComments() {
   elem.innerHTML = '';
 
   for (index = 0; index < content.length; index++) {
-    elem.appendChild(formatComment(content[index]));
+    elem.appendChild(formatComment(content[index], isAdmin));
   }
 
+  if (isAdmin) {
+    document.getElementById('comments-delete-all').innerHTML = '<button class="centered" onclick="deleteAllComments()">Delete All Comments</button>'
+  }
   document.getElementById('quantity').value = numToFetch;
 }
 
-function formatComment(comment) {
+function formatComment(comment, isAdmin) {
   let text = document.createElement('p');
   text.textContent = comment.content;
   const commentElem = document.createElement('div');
@@ -84,11 +91,13 @@ function formatComment(comment) {
   commentElem.id = comment.id;
   commentElem.appendChild(text);
 
-  let button = document.createElement('button');
-  button.textContent = "Delete Comment";
-  button.classList.add('comment-button');
-  button.onclick = function() {deleteOneComment(comment.id)};
-  commentElem.appendChild(button);
+  if (isAdmin) {
+    let button = document.createElement('button');
+    button.textContent = "Delete Comment";
+    button.classList.add('comment-button');
+    button.onclick = function() {deleteOneComment(comment.id)};
+    commentElem.appendChild(button);
+  }
   return commentElem;
 }
   
@@ -137,7 +146,14 @@ async function addComment() {
   setTimeout(loadComments, 500);
 }
 
+async function loadLogin() {
+  let response = await fetch('/userapi');
+  let res = await response.text();
+  document.getElementById('login').innerHTML = res;
+}
+
 function start() {
   typeWriter();
   loadComments();
+  loadLogin();
 }
