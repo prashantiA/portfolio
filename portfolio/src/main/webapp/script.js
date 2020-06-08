@@ -60,7 +60,7 @@ function typeWriter() {
 
 let commentPage = 0;
 let pageCursors = [];
-let prevNumToFetch = document.getElementById('quantity').value;
+let prevNumToFetch = 10;
 
 async function loadComments() {
   let numToFetch = document.getElementById('quantity').value;
@@ -75,8 +75,8 @@ async function loadComments() {
   const isAdmin = userRes === "true";
 
   queryString = '/display-comments?num=' + numToFetch;  
-  if (page !== 0) {
-    queryString += '&page=' + pageCursors[page];
+  if (commentPage !== 0) {
+    queryString += '&page=' + pageCursors[commentPage];
   }
 	
   const response = await fetch(queryString);
@@ -85,8 +85,8 @@ async function loadComments() {
   const elem = document.getElementById('comments-content');
   elem.innerHTML = '';
 
-  for (index = 0; index < (content[0]).length; index++) {
-    elem.appendChild(formatComment(content[0][index], isAdmin));
+  for (index = 0; index < (content.comments).length; index++) {
+    elem.appendChild(formatComment((content.comments)[index], isAdmin));
   }
 
   if (isAdmin) {
@@ -94,7 +94,7 @@ async function loadComments() {
   }
   document.getElementById('quantity').value = numToFetch;
 
-  pageCursors[page+1] = content[1];
+  pageCursors[commentPage+1] = content.cursor;
 }
 
 function formatComment(comment, isAdmin) {

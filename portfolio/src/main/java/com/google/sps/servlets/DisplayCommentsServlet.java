@@ -28,6 +28,7 @@ import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.api.datastore.QueryResultList;
 import com.google.sps.data.Comment;
+import com.google.sps.data.DisplayCommentInfo;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -79,8 +80,10 @@ public class DisplayCommentsServlet extends HttpServlet {
       Comment comment = new Comment (id, commentText, timestamp);
       commentContent.add(comment);
     }
+   
+    DisplayCommentInfo info = new DisplayCommentInfo(commentContent, results.getCursor().toWebSafeString());
 
-    String output = gson.toJson(commentContent);
-    response.getWriter().println("["+output+", " + results.getCursor().toWebSafeString() + "]");
+    String output = gson.toJson(info);
+    response.getWriter().println(output);
   }
 }
