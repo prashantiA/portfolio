@@ -41,6 +41,7 @@ public class NicknameServlet extends HttpServlet {
     UserService userService = UserServiceFactory.getUserService();
     if (!userService.isUserLoggedIn()) {
       System.err.println("No user currently logged in, cannot set nickname");
+      response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       return;
     }
     setUserNickname(userService.getCurrentUser().getUserId(), nickname);
@@ -51,9 +52,7 @@ public class NicknameServlet extends HttpServlet {
    * If no such entity exists returns null
    */ 
   private Entity getUserNicknameEntity(DatastoreService datastore, String id) {
-    Query query =
-        new Query("UserInfo")
-            .setFilter(new Query.FilterPredicate("id", Query.FilterOperator.EQUAL, id));
+    Query query = new Query("UserInfo").setFilter(new Query.FilterPredicate("id", Query.FilterOperator.EQUAL, id));
     PreparedQuery results = datastore.prepare(query);
     return results.asSingleEntity();
   }
