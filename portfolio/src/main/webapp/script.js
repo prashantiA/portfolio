@@ -70,7 +70,7 @@ async function loadComments() {
   }
   await makeValidPage();
 
-  const userResponse = await fetch('/userapi', {method: 'post'});
+  const userResponse = await fetch('/user-info');
   const userRes = await userResponse.json();
   const isAdmin = userRes.isAdmin;
 

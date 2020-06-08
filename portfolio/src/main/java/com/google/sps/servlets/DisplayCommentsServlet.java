@@ -72,7 +72,6 @@ public class DisplayCommentsServlet extends HttpServlet {
 
 
     ArrayList<Comment> commentContent = new ArrayList<Comment>();
-    int commentCount = 0;
     for (Entity entity : results) {
       long id = entity.getKey().getId();
       String commentText = (String) entity.getProperty("content");
