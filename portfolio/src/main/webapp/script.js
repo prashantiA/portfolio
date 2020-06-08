@@ -136,7 +136,7 @@ async function makeValidPage() {
   let numComments = await response.json();
   
   let pageSize = document.getElementById('quantity').value;
-  let maxPage = Math.ceil((numComments[0])/pageSize) - 1;
+  let maxPage = Math.ceil(numComments[0]/pageSize) - 1;
   
   commentPage = Math.max(0, Math.min(maxPage, commentPage));
 }
