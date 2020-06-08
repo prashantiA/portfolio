@@ -71,8 +71,8 @@ async function loadComments() {
   await makeValidPage();
 
   const userResponse = await fetch('/userapi', {method: 'post'});
-  const userRes = await userResponse.text();
-  const isAdmin = userRes === "true";
+  const userRes = await userResponse.json();
+  const isAdmin = userRes.isAdmin;
 
   queryString = '/display-comments?num=' + numToFetch;  
   if (commentPage !== 0) {
