@@ -16,27 +16,27 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions; 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
-import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
-import com.google.appengine.api.datastore.FetchOptions; 
-import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.api.datastore.QueryResultList;
+import com.google.gson.Gson;
 import com.google.sps.data.Comment;
 import com.google.sps.data.DisplayCommentInfo;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import com.google.gson.Gson;
 
 /** Servlet that returns comments to be displayed */
 @WebServlet("/display-comments")
@@ -77,7 +77,7 @@ public class DisplayCommentsServlet extends HttpServlet {
       long id = entity.getKey().getId();
       String commentText = (String) entity.getProperty("content");
       long timestamp = (long) entity.getProperty("timestamp");
-      Comment comment = new Comment (id, commentText, timestamp);
+      Comment comment = new Comment(id, commentText, timestamp);
       commentContent.add(comment);
     }
    
