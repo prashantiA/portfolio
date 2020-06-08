@@ -41,7 +41,7 @@ public class NicknameServlet extends HttpServlet {
     UserService userService = UserServiceFactory.getUserService();
     if (!userService.isUserLoggedIn()) {
       System.err.println("No user currently logged in, cannot set nickname");
-      response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+      resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       return;
     }
     setUserNickname(userService.getCurrentUser().getUserId(), nickname);

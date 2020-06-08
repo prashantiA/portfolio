@@ -178,7 +178,7 @@ async function loadLogin() {
   let res = await response.text();
   document.getElementById('login').innerHTML = res;
 
-  const userResponse = await fetch('/userapi', {method: 'post'});
+  const userResponse = await fetch('/user-info');
   const userRes = await userResponse.json();
   if (userRes.isLoggedIn) {
     document.getElementById('nickname-form').style.display = 'block';
