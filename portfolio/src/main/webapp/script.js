@@ -164,9 +164,10 @@ async function addComment() {
   document.getElementById('comment-text').value = '';
   queryString = '/add-comment?comment-text=' + content;
 
-  let resp = await fetch('/nicknames');
-  let author = await resp.text();
-  queryString += '&author=' + author;
+  if (document.getElementById('nickname-input').value !== '') {
+    await setNickname();
+    queryString += '&author=' + document.getElementById('nickname-input').value;
+  }
   const response = await fetch(queryString, {method: 'post'}); 
 
   setTimeout(loadComments, 500);
@@ -181,15 +182,18 @@ async function loadLogin() {
   const userRes = await userResponse.json();
   if (userRes.isLoggedIn) {
     document.getElementById('nickname-form').style.display = 'block';
+    res = await fetch('/nicknames');
+    let nickname = await res.text();
+    document.getElementById('nickname-input').value = nickname;
   } else {
     document.getElementById('nickname-form').style.display = 'none';
+    document.getElementById('nickname-input').value = '';
   }
 }
 
 async function setNickname() {
   let nickname = document.getElementById('nickname-input').value;
   let resp = await fetch('/nicknames?nickname=' + nickname, {method: 'post'});
-  document.getElementById('nickname-input').value = '';
 }
 
 function start() {
