@@ -59,28 +59,42 @@ function typeWriter() {
 }
 
 let commentPage = 0;
+let pageCursors = [];
+let prevNumToFetch = document.getElementById('quantity').value;
+
 async function loadComments() {
   let numToFetch = document.getElementById('quantity').value;
+  if (numToFetch !== prevNumToFetch) {
+    commentPage = 0;
+    prevNumToFetch = numToFetch;
+  }
   await makeValidPage();
 
   const userResponse = await fetch('/userapi', {method: 'post'});
   const userRes = await userResponse.text();
   const isAdmin = userRes === "true";
 
-  const response = await fetch('/display-comments?num=' + numToFetch + '&page=' + commentPage);
+  queryString = '/display-comments?num=' + numToFetch;  
+  if (page !== 0) {
+    queryString += '&page=' + pageCursors[page];
+  }
+	
+  const response = await fetch(queryString);
   const content = await response.json();
 
   const elem = document.getElementById('comments-content');
   elem.innerHTML = '';
 
-  for (index = 0; index < content.length; index++) {
-    elem.appendChild(formatComment(content[index], isAdmin));
+  for (index = 0; index < (content[0]).length; index++) {
+    elem.appendChild(formatComment(content[0][index], isAdmin));
   }
 
   if (isAdmin) {
     document.getElementById('comments-delete-all').innerHTML = '<button class="centered" onclick="deleteAllComments()">Delete All Comments</button>'
   }
   document.getElementById('quantity').value = numToFetch;
+
+  pageCursors[page+1] = content[1];
 }
 
 function formatComment(comment, isAdmin) {

@@ -25,6 +25,8 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.FetchOptions; 
+import com.google.appengine.api.datastore.Cursor;
+import com.google.appengine.api.datastore.QueryResultList;
 import com.google.sps.data.Comment;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -56,35 +58,29 @@ public class DisplayCommentsServlet extends HttpServlet {
       return;
     }
 
-    int page;
-    try {
-      page = Integer.parseInt(request.getParameter("page"));
-    } catch (NumberFormatException e) {
-      System.err.println("Could not convert to int: " + request.getParameter("page"));
-      response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-      return;
-    }
-
-
     Query query = new Query(Comment.ENTITY_KIND).addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    Iterable<Entity> results = datastore.prepare(query).asIterable(FetchOptions.Builder.withLimit(numToDisplay*(page+1)));
+
+    FetchOptions fetchOptions = FetchOptions.Builder.withLimit(numToDisplay);
+    String encodedCursor = request.getParameter("page");
+    if (encodedCursor != null) {
+      fetchOptions.startCursor(Cursor.fromWebSafeString(encodedCursor));
+    }
+
+    QueryResultList<Entity> results = datastore.prepare(query).asQueryResultList(fetchOptions);
 
 
     ArrayList<Comment> commentContent = new ArrayList<Comment>();
     int commentCount = 0;
     for (Entity entity : results) {
-      if (commentCount >= numToDisplay * page) {
-        long id = entity.getKey().getId();
-        String commentText = (String) entity.getProperty("content");
-        long timestamp = (long) entity.getProperty("timestamp");
-        Comment comment = new Comment (id, commentText, timestamp);
-        commentContent.add(comment);
-      }
-      commentCount++;
+      long id = entity.getKey().getId();
+      String commentText = (String) entity.getProperty("content");
+      long timestamp = (long) entity.getProperty("timestamp");
+      Comment comment = new Comment (id, commentText, timestamp);
+      commentContent.add(comment);
     }
 
     String output = gson.toJson(commentContent);
-    response.getWriter().println(output);
+    response.getWriter().println("["+output+", " + results.getCursor().toWebSafeString() + "]");
   }
 }
