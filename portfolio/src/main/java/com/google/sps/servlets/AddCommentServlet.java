@@ -28,6 +28,7 @@ public class AddCommentServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Entity commentEntity = new Entity(Comment.ENTITY_KIND);
     commentEntity.setProperty("content", request.getParameter("comment-text"));
+    commentEntity.setProperty("author", request.getParameter("author"));
     commentEntity.setProperty("timestamp", System.currentTimeMillis());
 				        
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
