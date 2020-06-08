@@ -98,11 +98,18 @@ async function loadComments() {
 }
 
 function formatComment(comment, isAdmin) {
+
+  let nickname = document.createElement('p');
+  let boldText = document.createElement('b');
+  boldText.textContent = comment.author;
+  nickname.appendChild(boldText);
+
   let text = document.createElement('p');
   text.textContent = comment.content;
   const commentElem = document.createElement('div');
   commentElem.classList.add('comment');
   commentElem.id = comment.id;
+  commentElem.appendChild(nickname);
   commentElem.appendChild(text);
 
   if (isAdmin) {
@@ -155,7 +162,12 @@ async function addComment() {
   let content = document.getElementById('comment-text').value;
   if (content === '') return;
   document.getElementById('comment-text').value = '';
-  const response = await fetch('/add-comment?comment-text=' + content, {method: 'post'}); 
+  queryString = '/add-comment?comment-text=' + content;
+
+  let resp = await fetch('/nicknames');
+  let author = await resp.text();
+  queryString += '&author=' + author;
+  const response = await fetch(queryString, {method: 'post'}); 
 
   setTimeout(loadComments, 500);
 }
@@ -164,6 +176,20 @@ async function loadLogin() {
   let response = await fetch('/userapi');
   let res = await response.text();
   document.getElementById('login').innerHTML = res;
+
+  const userResponse = await fetch('/userapi', {method: 'post'});
+  const userRes = await userResponse.json();
+  if (userRes.isLoggedIn) {
+    document.getElementById('nickname-form').style.display = 'block';
+  } else {
+    document.getElementById('nickname-form').style.display = 'none';
+  }
+}
+
+async function setNickname() {
+  let nickname = document.getElementById('nickname-input').value;
+  let resp = await fetch('/nicknames?nickname=' + nickname, {method: 'post'});
+  document.getElementById('nickname-input').value = '';
 }
 
 function start() {

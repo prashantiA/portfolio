@@ -140,6 +140,12 @@
     </div>
     <hr>
     <div id="comments" class="group">
+      <div id="nickname-form">
+        <input type="text" id="nickname-input" class="float-left">
+	<button onclick="setNickname()" class="comment-button float-left">Set Nickname</button>
+        <br><br>
+      </div>
+      <div style="clear: both"></div>
       <div id="add-comment-form">
         <textarea id="comment-text" class="float-left" maxlength="1500"></textarea>
         <button onclick="addComment()" class="comment-button float-left">Comment</button>

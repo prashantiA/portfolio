@@ -76,7 +76,9 @@ public class DisplayCommentsServlet extends HttpServlet {
       long id = entity.getKey().getId();
       String commentText = (String) entity.getProperty("content");
       long timestamp = (long) entity.getProperty("timestamp");
-      Comment comment = new Comment(id, commentText, timestamp);
+      String author = (String) entity.getProperty("author");
+      if (author == null) {author = "Anonymous";}
+      Comment comment = new Comment(id, commentText, author, timestamp);
       commentContent.add(comment);
     }
    

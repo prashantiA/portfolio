@@ -272,6 +272,19 @@ textarea {
   font-size: 1rem;
 }
 
+input[type="text"] {
+  width: 30%;
+  padding: 1rem 1.25rem;
+  margin-top: 0;
+  margin-right: 0.5rem;
+  border-radius: 0.25rem;
+  border-color: #002229;
+  border-width: thin;
+  color: #002229;
+  font-family: "Cardo", serif;
+  font-size: 1rem;
+}
+
 input[type="number"] {
   width: 3rem;
   height: 2rem;
