@@ -1,5 +1,6 @@
 package com.google.sps.data;
 
+/* Holds information about the login and admin status of a user */
 public final class UserLoginInfo {
   
   public boolean isAdmin;

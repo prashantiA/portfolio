@@ -16,7 +16,7 @@
     <li><a href="#about-me">About Me</a></li>
     <li><a href="#proj-resume">Projects and Resume</a></li>
     <li><a href="#blog">Blog</a></li>
-    <li id="login" class="float-right"></li>
+    <li id="login" class="float-right">Log In</li>
   </ul>
   </nav>
   <body onload="start()">
@@ -143,16 +143,14 @@
       <div id="nickname-form">
         <input type="text" id="nickname-input" class="float-left">
 	<button onclick="setNickname()" class="comment-button float-left">Set Nickname</button>
-        <br><br>
-      </div>
-      <div style="clear: both"></div>
-      <div id="add-comment-form">
-        <textarea id="comment-text" class="float-left" maxlength="1500"></textarea>
-        <button onclick="addComment()" class="comment-button float-left">Comment</button>
       </div>
       <button id="comment-quantity" class="comment-button float-right" onclick="loadComments()">Update</button>
       <input type="number" id="quantity" name="quantity" class="float-right" value="10" min="1" max="50">
       <p class="float-right">Number of comments to display:</p>
+      <div id="add-comment-form">
+        <textarea id="comment-text" class="float-left" maxlength="1500"></textarea>
+        <button onclick="addComment()" class="comment-button float-left">Comment</button>
+      </div>
       <div style="clear: both"></div>
       <div id="comments-nav-top" class="comments-nav">
         <button class="comment-button float-left" onclick="prevPage()">Previous Page</button>
