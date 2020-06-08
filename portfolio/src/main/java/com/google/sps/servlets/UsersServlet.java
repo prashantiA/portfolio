@@ -2,6 +2,8 @@ package com.example.appengine.users;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.gson.Gson;
+import com.google.sps.data.UserLoginInfo;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +37,9 @@ public class UsersServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     boolean isAdmin = UserServiceFactory.getUserService().isUserLoggedIn() && UserServiceFactory.getUserService().isUserAdmin();
-    resp.setContentType("text/plain");
-    resp.getWriter().print(Boolean.toString(isAdmin));
+    resp.setContentType("applications/json");
+    UserLoginInfo info = new UserLoginInfo(isAdmin, UserServiceFactory.getUserService().isUserLoggedIn());
+    Gson gson = new Gson();
+    resp.getWriter().print(gson.toJson(info));
   }
 }
