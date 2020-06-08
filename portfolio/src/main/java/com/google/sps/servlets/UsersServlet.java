@@ -23,22 +23,22 @@ public class UsersServlet extends HttpServlet {
     UserService userService = UserServiceFactory.getUserService();
 
     resp.setContentType("text/html");
+
+    String userUrl = "<a href=\"" + userService.createLoginURL("/index.html") + "\">Log In</a>";
     if (userService.isUserLoggedIn()) {
-      resp.getWriter()
-          .println(
-              "<a href=\""+ userService.createLogoutURL("/index.html") + "\">Sign Out</a>");
-    } else {
-      resp.getWriter()
-          .println(
-              "<a href=\"" + userService.createLoginURL("/index.html") + "\">Log In</a>");
+      userUrl = "<a href=\""+ userService.createLogoutURL("/index.html") + "\">Sign Out</a>";
     }
+
+    resp.getWriter().println(userUrl);
   }
 
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    boolean isAdmin = UserServiceFactory.getUserService().isUserLoggedIn() && UserServiceFactory.getUserService().isUserAdmin();
+    UserService userService = UserServiceFactory.getUserService();
+    boolean loggedIn = userService.isUserLoggedIn();
+    boolean isAdmin = loggedIn && userService.isUserAdmin();
     resp.setContentType("applications/json");
-    UserLoginInfo info = new UserLoginInfo(isAdmin, UserServiceFactory.getUserService().isUserLoggedIn());
+    UserLoginInfo info = new UserLoginInfo(isAdmin, loggedIn);
     Gson gson = new Gson();
     resp.getWriter().print(gson.toJson(info));
   }
