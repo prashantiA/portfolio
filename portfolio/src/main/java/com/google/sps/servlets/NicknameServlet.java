@@ -22,13 +22,15 @@ import javax.servlet.http.HttpServletResponse;
 )
 public class NicknameServlet extends HttpServlet {
 
+  public static final String DEFAULT_NICKNAME = "Anonymous Goose";
+
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     resp.setContentType("text/html");
    
     UserService userService = UserServiceFactory.getUserService();
     if (!userService.isUserLoggedIn()) {
-      resp.getWriter().print("Anonymous");
+      resp.getWriter().print(DEFAULT_NICKNAME);
       return;
     }
 
@@ -64,7 +66,7 @@ public class NicknameServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Entity entity = getUserNicknameEntity(datastore, id);
     if (entity == null) {
-      return "Anonymous";
+      return DEFAULT_NICKNAME;
     }
     String nickname = (String) entity.getProperty("nickname");
     return nickname;

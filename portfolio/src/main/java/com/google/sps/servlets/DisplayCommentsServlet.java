@@ -30,6 +30,7 @@ import com.google.appengine.api.datastore.QueryResultList;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
 import com.google.sps.data.DisplayCommentInfo;
+import com.google.sps.servlet.NicknameServlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +78,9 @@ public class DisplayCommentsServlet extends HttpServlet {
       String commentText = (String) entity.getProperty("content");
       long timestamp = (long) entity.getProperty("timestamp");
       String author = (String) entity.getProperty("author");
-      if (author == null) {author = "Anonymous";}
+      if (author == null) {
+        author = NicknameServlet.DEFAULT_NICKNAME;
+      }
       Comment comment = new Comment(id, commentText, author, timestamp);
       commentContent.add(comment);
     }
