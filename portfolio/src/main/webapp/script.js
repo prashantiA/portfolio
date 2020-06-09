@@ -164,7 +164,7 @@ async function addComment() {
   document.getElementById('comment-text').value = '';
   queryString = '/add-comment?comment-text=' + content;
 
-  if (document.getElementById('nickname-input').value !== '') {
+  if (document.getElementById('nickname-input').value.replace(/\s/g, '')  !== '') {
     await setNickname();
     queryString += '&author=' + document.getElementById('nickname-input').value;
   }
