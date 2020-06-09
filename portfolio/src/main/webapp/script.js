@@ -74,6 +74,17 @@ async function loadComments() {
   const userRes = await userResponse.json();
   const isAdmin = userRes.isAdmin;
 
+  if (userRes.isLoggedIn) {
+    document.getElementById('nickname-form').style.display = 'block';
+    res = await fetch('/nicknames');
+    let nickname = await res.text();
+    document.getElementById('nickname-input').value = nickname;
+  } else {
+    document.getElementById('nickname-form').style.display = 'none';
+    document.getElementById('nickname-input').value = '';
+  }
+
+
   queryString = '/display-comments?num=' + numToFetch;  
   if (commentPage !== 0) {
     queryString += '&page=' + pageCursors[commentPage];
@@ -177,18 +188,6 @@ async function loadLogin() {
   let response = await fetch('/userapi');
   let res = await response.text();
   document.getElementById('login').innerHTML = res;
-
-  const userResponse = await fetch('/user-info');
-  const userRes = await userResponse.json();
-  if (userRes.isLoggedIn) {
-    document.getElementById('nickname-form').style.display = 'block';
-    res = await fetch('/nicknames');
-    let nickname = await res.text();
-    document.getElementById('nickname-input').value = nickname;
-  } else {
-    document.getElementById('nickname-form').style.display = 'none';
-    document.getElementById('nickname-input').value = '';
-  }
 }
 
 async function setNickname() {
