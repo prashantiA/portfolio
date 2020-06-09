@@ -14,24 +14,28 @@
 
 package com.google.sps;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    Collection<Event> sortedEvents = Collections.sort(events, Event.ORDER_BY_START); 
+    ArrayList<Event> sortedEvents = new ArrayList<Event>(events);
+    Collections.sort(sortedEvents, Event.ORDER_BY_START); 
     int intervalStart = TimeRange.START_OF_DAY;
-    Collection<TimeRange> available = new Collection<TimeRange>();
+    ArrayList<TimeRange> available = new ArrayList<TimeRange>();
+
     for (Event e : sortedEvents) {
-      if (intervalStart > e.getWhen().start() || Collections.disjoint(e.getAttendees(), request.getAttendees())) {
-	continue;
+      if (intervalStart > e.getWhen().end() || Collections.disjoint(e.getAttendees(), request.getAttendees())) {
+        continue;
       } else if (e.getWhen().start() - intervalStart >= request.getDuration()) {
-        TimeRange free = new TimeRange(intervalStart, e.getWhen().start() - intervalStart);
+        TimeRange free = TimeRange.fromStartEnd(intervalStart, e.getWhen().start(), false);
         available.add(free);
       }
       intervalStart = e.getWhen().end();
     }
     if (TimeRange.END_OF_DAY - intervalStart >= request.getDuration()) {
-      TimeRange free = new TimeRange(intervalStart, e.getWhen().start - intervalStart);
+      TimeRange free = TimeRange.fromStartEnd(intervalStart, TimeRange.END_OF_DAY, true);
       available.add(free);
     }
     return available;
