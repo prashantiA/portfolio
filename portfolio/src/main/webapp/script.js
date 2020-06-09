@@ -160,7 +160,7 @@ function prevPage() {
 
 async function addComment() {
   let content = document.getElementById('comment-text').value;
-  if (content === '') return;
+  if (content.replace(/\s/g, '') === '') return;
   document.getElementById('comment-text').value = '';
   queryString = '/add-comment?comment-text=' + content;
 
