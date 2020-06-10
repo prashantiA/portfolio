@@ -60,7 +60,7 @@ public class NicknameServlet extends HttpServlet {
   }
 
   /**
-   * Returns the nickname of the user with id, or empty String if the user has not set a nickname.
+   * Returns the nickname of the user with id, or the default nickame if the user has not set a nickname (UserInfo cannot be found)
    */
   private String getUserNickname(String id) {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -68,8 +68,7 @@ public class NicknameServlet extends HttpServlet {
     if (entity == null) {
       return DEFAULT_NICKNAME;
     }
-    String nickname = (String) entity.getProperty("nickname");
-    return nickname;
+    return (String) entity.getProperty("nickname");
   }
 
   /**
@@ -79,7 +78,8 @@ public class NicknameServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Entity oldRes = getUserNicknameEntity(datastore, id);
     if (oldRes != null) {
-      datastore.delete(oldRes.getKey());
+      oldRes.setProperty("nickname", nickname);
+      return;
     }
     Entity entity = new Entity("UserInfo", id);
     entity.setProperty("id", id);
