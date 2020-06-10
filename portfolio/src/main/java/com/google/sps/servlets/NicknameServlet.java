@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 )
 public class NicknameServlet extends HttpServlet {
 
-  public static final String DEFAULT_NICKNAME = "Anonymous Goose";
+  public static final String DEFAULT_NICKNAME = "Untitled Goose";
 
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
