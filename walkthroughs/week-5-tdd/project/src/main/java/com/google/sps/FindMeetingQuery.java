@@ -22,6 +22,24 @@ public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     ArrayList<Event> sortedEvents = new ArrayList<Event>(events);
     Collections.sort(sortedEvents, Event.ORDER_BY_START); 
+    
+    Collection<String> optional = request.getOptionalAttendees();
+    if (!optional.isEmpty()) {
+      ArrayList<String> combinedPeople = new ArrayList<String>();
+      combinedPeople.addAll(request.getAttendees());
+      combinedPeople.addAll(request.getOptionalAttendees());
+      Collection<TimeRange> res = queryFromSorted(sortedEvents, new MeetingRequest(combinedPeople, request.getDuration()));
+      if (!res.isEmpty()) {
+        return res;
+      }
+      else if (request.getAttendees().isEmpty()) {
+        return res;
+      }
+    }
+    return queryFromSorted(sortedEvents, request);
+  }
+
+  private Collection<TimeRange> queryFromSorted(Collection<Event> sortedEvents, MeetingRequest request) {
     int intervalStart = TimeRange.START_OF_DAY;
     ArrayList<TimeRange> available = new ArrayList<TimeRange>();
 
