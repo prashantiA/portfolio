@@ -14,6 +14,7 @@
 
 package com.google.sps;
 
+import java.lang.Math;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -29,10 +30,7 @@ public final class FindMeetingQuery {
       combinedPeople.addAll(request.getAttendees());
       combinedPeople.addAll(request.getOptionalAttendees());
       Collection<TimeRange> res = queryFromSorted(sortedEvents, new MeetingRequest(combinedPeople, request.getDuration()));
-      if (!res.isEmpty()) {
-        return res;
-      }
-      else if (request.getAttendees().isEmpty()) {
+      if (!res.isEmpty() || request.getAttendees().isEmpty()) {
         return res;
       }
     }
@@ -50,7 +48,7 @@ public final class FindMeetingQuery {
         TimeRange free = TimeRange.fromStartEnd(intervalStart, e.getWhen().start(), false);
         available.add(free);
       }
-      intervalStart = e.getWhen().end();
+      intervalStart = Math.max(e.getWhen().end(), intervalStart);
     }
     if (TimeRange.END_OF_DAY - intervalStart >= request.getDuration()) {
       TimeRange free = TimeRange.fromStartEnd(intervalStart, TimeRange.END_OF_DAY, true);
