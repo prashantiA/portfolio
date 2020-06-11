@@ -30,12 +30,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/blobstore-upload-url")
 public class BlobstoreUploadUrlServlet extends HttpServlet {
 
-  private static final long MAX_UPLOAD = 1000000;
+  private static final long MAX_UPLOAD_BYTES = 1000000;
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-    String uploadUrl = blobstoreService.createUploadUrl("/add-comment", UploadOptions.Builder.withMaxUploadSizeBytes(MAX_UPLOAD));
+    String uploadUrl = blobstoreService.createUploadUrl("/add-comment", UploadOptions.Builder.withMaxUploadSizeBytes(MAX_UPLOAD_BYTES));
 
     response.setContentType("text/html");
     response.getWriter().println(uploadUrl);
