@@ -16,7 +16,15 @@
  * Adds a random fun fact to the page.
  */
 
-let prev = null;
+let prevFactIndex = null;
+let commentPage = 0;
+let pageCursors = [];
+let prevNumToFetch = 10;
+let imageUploadUrl = null;
+let typewriterIndex = 0;
+let typewriterElem = null;
+const TYPEWRITER_TEXT = 'Welcome to my personal portfolio!';
+const TYPEWRITER_SPEED = 75;
 
 function addFunFact() {
   const facts =
@@ -27,9 +35,9 @@ function addFunFact() {
   // Pick a random greeting.
   let index = null;
   let seed = Math.random();
-  if (prev != null) {
+  if (prevFactIndex != null) {
     index = Math.floor(seed * (facts.length - 1));
-    if (index >= prev) index += 1;
+    if (index >= prevFactIndex) index += 1;
   }
   else {
     index = Math.floor(seed * (facts.length));
@@ -38,13 +46,8 @@ function addFunFact() {
   // Add it to the page.
   let elem = document.getElementById('fact');
   $(elem).animate({'opacity': 0}, 1000, function () {$(elem).text(fact);}).animate({'opacity': 1}, 1000);
-  prev = index;  
+  prevFactIndex = index;  
 }
-
-let typewriterIndex = 0;
-let typewriterElem = null;
-const TYPEWRITER_TEXT = 'Welcome to my personal portfolio!';
-const TYPEWRITER_SPEED = 75;
 
 function typeWriter() {
   if (typewriterIndex === 0) {
@@ -57,10 +60,6 @@ function typeWriter() {
     setTimeout(typeWriter, TYPEWRITER_SPEED);
   }
 }
-
-let commentPage = 0;
-let pageCursors = [];
-let prevNumToFetch = 10;
 
 async function loadComments() {
   let numToFetch = document.getElementById('quantity').value;
@@ -179,7 +178,9 @@ function prevPage() {
 
 async function addComment() {
   let content = document.getElementById('comment-text').value;
-  if (content.replace(/\s/g, '') === '' && document.getElementById('image').files.length === 0) return;
+  if (content.replace(/\s/g, '') === '' && document.getElementById('image').files.length === 0) {
+    return;
+  }
  
   let data = new FormData(document.getElementById('add-comment-form'));
 
@@ -188,12 +189,11 @@ async function addComment() {
     data.append("author", document.getElementById('nickname-input').value);
   }
   
-  let response;
-  if (imageUploadUrl === null) {
-    await fetch('/add-comment', {method: 'post', body: data});
-  } else {
-    await fetch(imageUploadUrl, {method: 'post', body: data});
+  let fetchUrl = '/add-comment';
+  if (imageUploadUrl !== null) {
+    fetchUrl = imageUploadUrl;
   }
+  await fetch(fetchUrl, {method: 'post', body: data});
   
   document.getElementById('add-comment-form').reset();
   setTimeout(loadComments, 500);
@@ -211,7 +211,6 @@ async function setNickname() {
   let resp = await fetch('/nicknames?nickname=' + nickname, {method: 'post'});
 }
 
-let imageUploadUrl = null;
 
 async function fetchBlobstoreUrlAndShowForm() {
   const resp = await fetch('/blobstore-upload-url');
