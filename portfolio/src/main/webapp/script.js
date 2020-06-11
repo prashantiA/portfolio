@@ -123,6 +123,14 @@ function formatComment(comment, isAdmin) {
   commentElem.appendChild(nickname);
   commentElem.appendChild(text);
 
+  if (comment.hasOwnProperty("image")) {
+    let image = document.createElement('img');
+    image.src = comment.image;
+    image.classList.add('comment-image');
+    commentElem.appendChild(image);
+    commentElem.appendChild(document.createElement('br'));
+  }
+
   if (isAdmin) {
     let button = document.createElement('button');
     button.textContent = "Delete Comment";
@@ -171,17 +179,25 @@ function prevPage() {
 
 async function addComment() {
   let content = document.getElementById('comment-text').value;
-  if (content.replace(/\s/g, '') === '') return;
-  document.getElementById('comment-text').value = '';
-  queryString = '/add-comment?comment-text=' + content;
+  if (content.replace(/\s/g, '') === '' && document.getElementById('image').files.length === 0) return;
+ 
+  let data = new FormData(document.getElementById('add-comment-form'));
 
-  if (document.getElementById('nickname-input').value.replace(/\s/g, '')  !== '') {
+  if (document.getElementById('nickname-input').value.replace(/\s/g, '') !== '') {
     await setNickname();
-    queryString += '&author=' + document.getElementById('nickname-input').value;
+    data.append("author", document.getElementById('nickname-input').value);
   }
-  const response = await fetch(queryString, {method: 'post'}); 
-
+  
+  let response;
+  if (imageUploadUrl === null) {
+    await fetch('/add-comment', {method: 'post', body: data});
+  } else {
+    await fetch(imageUploadUrl, {method: 'post', body: data});
+  }
+  
+  document.getElementById('add-comment-form').reset();
   setTimeout(loadComments, 500);
+  fetchBlobstoreUrlAndShowForm();
 }
 
 async function loadLogin() {
@@ -195,8 +211,17 @@ async function setNickname() {
   let resp = await fetch('/nicknames?nickname=' + nickname, {method: 'post'});
 }
 
+let imageUploadUrl = null;
+
+async function fetchBlobstoreUrlAndShowForm() {
+  const resp = await fetch('/blobstore-upload-url');
+  imageUploadUrl = await resp.text();
+  document.getElementById('image').style.display = 'block';
+}
+
 function start() {
   typeWriter();
   loadComments();
   loadLogin();
+  fetchBlobstoreUrlAndShowForm();
 }

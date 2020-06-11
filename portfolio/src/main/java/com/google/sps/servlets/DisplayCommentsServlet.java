@@ -78,10 +78,11 @@ public class DisplayCommentsServlet extends HttpServlet {
       String commentText = (String) entity.getProperty("content");
       long timestamp = (long) entity.getProperty("timestamp");
       String author = (String) entity.getProperty("author");
+      String img = (String) entity.getProperty("image");
       if (author == null) {
         author = NicknameServlet.DEFAULT_NICKNAME;
       }
-      Comment comment = new Comment(id, commentText, author, timestamp);
+      Comment comment = new Comment(id, commentText, author, timestamp, img);
       commentContent.add(comment);
     }
    

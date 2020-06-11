@@ -260,7 +260,7 @@ button:hover {
 }
 
 textarea {
-  width: 40%;
+  width: 30%;
   padding: 1rem 1.25rem;
   margin-top: 0;
   margin-right: 0.5rem;
@@ -296,8 +296,25 @@ input[type="number"] {
   border-width: thin;
 }
 
+input[type="file"] {
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.25rem;
+  border-color: #002229;
+  font-family: "Cardo", serif;
+  font-size: 1rem;
+  border-width: thin;
+}
+
+
 .comments-nav {
   width: 100%;
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.comment-image {
+  max-height: 20rem;
+  max-width: 20rem;
+  margin-left: auto;
+  margin-right: auto;
 }
