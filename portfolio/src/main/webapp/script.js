@@ -122,9 +122,9 @@ function formatComment(comment, isAdmin) {
   commentElem.appendChild(nickname);
   commentElem.appendChild(text);
 
-  if (comment.hasOwnProperty("image")) {
+  if (comment.hasOwnProperty("imageUrl")) {
     let image = document.createElement('img');
-    image.src = comment.image;
+    image.src = comment.imageUrl;
     image.classList.add('comment-image');
     commentElem.appendChild(image);
     commentElem.appendChild(document.createElement('br'));
