@@ -60,15 +60,14 @@ public class AddCommentServlet extends HttpServlet {
     }
 
     BlobKey blobKey = blobKeys.get(0);
-
     BlobInfo blobInfo = new BlobInfoFactory().loadBlobInfo(blobKey);
     if (blobInfo.getSize() == 0) {
       blobstoreService.delete(blobKey);
       return null;
     }
+
     ImagesService imagesService = ImagesServiceFactory.getImagesService();
     ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
-
     try {
       URL url = new URL(imagesService.getServingUrl(options));
       return url.getPath();
