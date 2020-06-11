@@ -9,11 +9,13 @@ public final class Comment {
   private final String content;
   private final String author;
   private final long timestamp;
+  private final String image;
 	      
-  public Comment(long id, String content, String author, long timestamp) {
+  public Comment(long id, String content, String author, long timestamp, String image) {
     this.id = id;
     this.content = content;
     this.timestamp = timestamp;
     this.author = author;
+    this.image = image;
   }
 }

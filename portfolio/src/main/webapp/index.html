@@ -147,10 +147,11 @@
       <button id="comment-quantity" class="comment-button float-right" onclick="loadComments()">Update</button>
       <input type="number" id="quantity" name="quantity" class="float-right" value="10" min="1" max="50">
       <p class="float-right">Number of comments to display:</p>
-      <div id="add-comment-form">
-        <textarea id="comment-text" class="float-left" maxlength="1500"></textarea>
-        <button onclick="addComment()" class="comment-button float-left">Comment</button>
-      </div>
+      <form id="add-comment-form" enctype="multipart/form-data">
+        <textarea id="comment-text" name="content" class="float-left" maxlength="1500"></textarea>
+	<input type="file" id="image" name="image" class="float-left" style="display: none">
+        <button id="add-submit" class="comment-button float-left" onclick="addComment(); return false;">Comment</button>
+      </form>
       <div style="clear: both"></div>
       <div id="comments-nav-top" class="comments-nav">
         <button class="comment-button float-left" onclick="prevPage()">Previous Page</button>
