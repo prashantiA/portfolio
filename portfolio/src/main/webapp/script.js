@@ -189,10 +189,8 @@ async function addComment() {
     data.append("author", document.getElementById('nickname-input').value);
   }
   
-  let fetchUrl = '/add-comment';
-  if (imageUploadUrl !== null) {
-    fetchUrl = imageUploadUrl;
-  }
+  
+  let fetchUrl = (imageUploadUrl !== null) ? imageUploadUrl : '/add-comment'
   await fetch(fetchUrl, {method: 'post', body: data});
   
   document.getElementById('add-comment-form').reset();

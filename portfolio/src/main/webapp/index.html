@@ -140,7 +140,7 @@
     </div>
     <hr>
     <div id="comments" class="group">
-      <div id="nickname-form" style="display: none">
+      <div id="nickname-form" class="hide">
         <input type="text" id="nickname-input" class="float-left">
 	<button onclick="setNickname()" class="comment-button float-left">Set Nickname</button>
       </div>
@@ -149,7 +149,7 @@
       <p class="float-right">Number of comments to display:</p>
       <form id="add-comment-form" enctype="multipart/form-data">
         <textarea id="comment-text" name="content" class="float-left" maxlength="1500"></textarea>
-        <input type="file" id="image" name="image" class="float-left" style="display: none">
+        <input type="file" id="image" name="image" class="float-left hide">
         <button id="add-submit" class="comment-button float-left" onclick="addComment(); return false;">Comment</button>
       </form>
       <div style="clear: both"></div>
