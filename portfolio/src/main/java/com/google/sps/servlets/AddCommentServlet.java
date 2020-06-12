@@ -61,11 +61,14 @@ public class AddCommentServlet extends HttpServlet {
 
     BlobKey blobKey = blobKeys.get(0);
     BlobInfo blobInfo = new BlobInfoFactory().loadBlobInfo(blobKey);
+    // If no file upload on live server delete the blob so it doesn't clog up the service
     if (blobInfo.getSize() == 0) {
       blobstoreService.delete(blobKey);
       return null;
     }
 
+    // To support running in Google Cloud Shell with AppEngine's devserver, we must use the relative
+    // path to the image, rather than the path returned by imagesService which contains a host.
     ImagesService imagesService = ImagesServiceFactory.getImagesService();
     ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
     try {
